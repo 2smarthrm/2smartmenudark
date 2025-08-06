@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ContentCard } from './components/ContentCard';
-import { SidePanel } from './components/SidePanel';
-import { Navigation } from './components/Navigation';
-import { ModulesPage } from './components/ModulesPage';
-import { SupportPage } from './components/SupportPage';
-import { LearningPage } from './components/LearningPage';
-import { ThemeProvider, useTheme } from './contexts/ThemeContext';
-import { contentItems } from './data/content';
-import { ContentItem } from './types';
+import React, { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ContentCard } from "./components/ContentCard";
+import { SidePanel } from "./components/SidePanel";
+import { Navigation } from "./components/Navigation";
+import { ModulesPage } from "./components/ModulesPage";
+import { SupportPage } from "./components/SupportPage";
+import { LearningPage } from "./components/LearningPage";
+import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
+import { contentItems } from "./data/content";
+import { ContentItem } from "./types";
 
 function AppContent() {
   const { isDark } = useTheme();
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('novidades');
+  const [activeTab, setActiveTab] = useState("novidades");
   const [showLearningPage, setShowLearningPage] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -41,7 +41,9 @@ function AppContent() {
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + contentItems.length) % contentItems.length);
+    setCurrentSlide(
+      (prev) => (prev - 1 + contentItems.length) % contentItems.length
+    );
   };
 
   const goToSlide = (index: number) => {
@@ -53,29 +55,43 @@ function AppContent() {
       return <LearningPage onBack={handleBackFromLearning} />;
     }
 
-    if (activeTab === 'modulos') {
+    if (activeTab === "modulos") {
       return <ModulesPage />;
     }
 
-    if (activeTab === 'suporte') {
+    if (activeTab === "suporte") {
       return <SupportPage onLearnClick={handleLearnClick} />;
     }
 
     // Default: Novidades content
     const currentItem = contentItems[currentSlide];
-    
+
     return (
       <div className="px-8 lg:px-16 py-8">
         {/* Header */}
         <div className="mb-16 max-w-4xl">
-          <h1 className={`text-3xl lg:text-4xl font-normal mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h1
+            className={`text-3xl lg:text-4xl font-normal mb-6 ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}
+          >
             O que a 2Smart tem de novidades e campanhas!
           </h1>
-          <p className={`text-base leading-relaxed mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Acompanhe as nossas comunicações importantes e novidades preparadas especialmente para si.
+          <p
+            className={`text-base leading-relaxed mb-2 ${
+              isDark ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Acompanhe as nossas comunicações importantes e novidades preparadas
+            especialmente para si.
           </p>
-          <p className={`text-base leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Desde promoções sazonais a atualizações de serviços — partilhamos tudo aqui.
+          <p
+            className={`text-base leading-relaxed ${
+              isDark ? "text-gray-400" : "text-gray-600"
+            }`}
+          >
+            Desde promoções sazonais a atualizações de serviços — partilhamos
+            tudo aqui.
           </p>
         </div>
 
@@ -90,7 +106,7 @@ function AppContent() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/60" />
-              
+
               {/* Navigation Arrows */}
               <button
                 onClick={prevSlide}
@@ -98,7 +114,7 @@ function AppContent() {
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              
+
               <button
                 onClick={nextSlide}
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100"
@@ -119,42 +135,65 @@ function AppContent() {
           <div className="space-y-8">
             {/* Tags */}
             <div className="flex gap-3">
-              <span className={`px-4 py-2 text-sm rounded-full border ${
-                isDark 
-                ? 'bg-blue-600/20 text-blue-400 border-blue-600/30'
-                :'bg-blue-400/20 text-blue-500 border-blue-600/40'
-              }`}>
+              <span
+                className={`px-4 py-2 text-sm rounded-full border ${
+                  isDark
+                    ? "bg-blue-600/20 text-blue-400 border-blue-600/30"
+                    : "bg-blue-400/20 text-blue-500 border-blue-600/40"
+                }`}
+              >
                 {currentItem.subtitle}
               </span>
-              <span className={`px-4 py-2 text-sm rounded-full border ${
-                isDark 
-                  ? 'bg-gray-800/50 text-gray-300 border-gray-700' 
-                  : 'bg-gray-200/50 text-gray-700 border-gray-300'
-              }`}>
+              <span
+                className={`px-4 py-2 text-sm rounded-full border ${
+                  isDark
+                    ? "bg-gray-800/50 text-gray-300 border-gray-700"
+                    : "bg-gray-200/50 text-gray-700 border-gray-300"
+                }`}
+              >
                 {currentItem.category}
               </span>
             </div>
 
             {/* Title */}
-            <h3 className={`text-2xl lg:text-3xl font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <h3
+              className={`text-2xl lg:text-3xl font-semibold ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
               {currentItem.description}
             </h3>
 
             {/* Description */}
-            <p className={`text-lg leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Acompanhe as nossas comunicações importantes e novidades preparadas especialmente para si.
-              Desde promoções sazonais a atualizações de serviços — partilhamos tudo aqui.
-              Acompanhe as nossas comunicações importantes.
+            <p
+              className={`text-lg leading-relaxed ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              Acompanhe as nossas comunicações importantes e novidades
+              preparadas especialmente para si. Desde promoções sazonais a
+              atualizações de serviços — partilhamos tudo aqui. Acompanhe as
+              nossas comunicações importantes.
             </p>
 
             {/* CTA Button */}
-            <button 
+            <button
               onClick={() => handleSelectItem(currentItem)}
               className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
             >
               Saiba mais
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="ml-2 w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>
@@ -167,9 +206,13 @@ function AppContent() {
               key={index}
               onClick={() => goToSlide(index)}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === currentSlide 
-                  ? (isDark ? 'bg-white' : 'bg-gray-900') 
-                  : (isDark ? 'bg-gray-600 hover:bg-gray-400' : 'bg-gray-400 hover:bg-gray-600')
+                index === currentSlide
+                  ? isDark
+                    ? "bg-white"
+                    : "bg-gray-900"
+                  : isDark
+                  ? "bg-gray-600 hover:bg-gray-400"
+                  : "bg-gray-400 hover:bg-gray-600"
               }`}
             />
           ))}
@@ -179,8 +222,16 @@ function AppContent() {
   };
 
   return (
-    <div className={`min-h-screen transition-colors ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
-      <div className={`transition-all duration-300 ${isPanelOpen ? 'lg:mr-[500px]' : ''}`}>
+    <div
+      className={`min-h-screen transition-colors ${
+        isDark ? "bg-black text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      <div
+        className={`transition-all duration-300 ${
+          isPanelOpen ? "lg:mr-[500px]" : ""
+        }`}
+      >
         {/* Navigation - hide when showing learning page */}
         {!showLearningPage && (
           <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
@@ -191,7 +242,7 @@ function AppContent() {
       </div>
 
       {/* Side Panel - only show for novidades tab and not on learning page */}
-      {activeTab === 'novidades' && !showLearningPage && (
+      {activeTab === "novidades" && !showLearningPage && (
         <SidePanel
           item={selectedItem}
           isOpen={isPanelOpen}
