@@ -123,7 +123,7 @@ function AppContent() {
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mx-16">
             {/* Left Side - Image */}
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 relative group flex-shrink-0">
+            <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 relative group flex-shrink-0 transition-transform duration-300">
               <img
                 src={currentItem.image}
                 alt={currentItem.title}
@@ -140,7 +140,7 @@ function AppContent() {
             </div>
 
             {/* Right Side - Content */}
-            <div className="space-y-8">
+            <div className="space-y-8 flex-shrink-0">
               {/* Tags */}
               <div className="flex gap-3">
                 <span
@@ -178,10 +178,7 @@ function AppContent() {
                   isDark ? "text-gray-400" : "text-gray-600"
                 }`}
               >
-                Acompanhe as nossas comunicações importantes e novidades
-                preparadas especialmente para si. Desde promoções sazonais a
-                atualizações de serviços — partilhamos tudo aqui. Acompanhe as
-                nossas comunicações importantes.
+                {currentItem.content}
               </p>
 
               {/* CTA Button */}
