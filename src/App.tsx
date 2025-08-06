@@ -98,7 +98,19 @@ function AppContent() {
         {/* Main Content Layout */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           {/* Left Side - Image */}
-          <div className="relative">
+          <div className="relative flex items-center">
+            {/* Left Arrow - Outside Image */}
+            <button
+              onClick={prevSlide}
+              className={`absolute -left-16 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
+                isDark
+                  ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700 border border-gray-700"
+                  : "bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-gray-200 shadow-lg"
+              }`}
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
             <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 relative group">
               <img
                 src={currentItem.image}
@@ -107,21 +119,6 @@ function AppContent() {
               />
               <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/60" />
 
-              {/* Navigation Arrows */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors opacity-0 group-hover:opacity-100"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-
               {/* Title Overlay */}
               <div className="absolute bottom-8 left-8 right-8">
                 <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
@@ -129,6 +126,18 @@ function AppContent() {
                 </h2>
               </div>
             </div>
+
+            {/* Right Arrow - Outside Image */}
+            <button
+              onClick={nextSlide}
+              className={`absolute -right-16 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
+                isDark
+                  ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700 border border-gray-700"
+                  : "bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-gray-200 shadow-lg"
+              }`}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
           </div>
 
           {/* Right Side - Content */}
