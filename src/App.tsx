@@ -123,11 +123,11 @@ function AppContent() {
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mx-16">
             {/* Left Side - Image */}
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 relative group">
+            <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 relative group flex-shrink-0">
               <img
                 src={currentItem.image}
                 alt={currentItem.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/60" />
 

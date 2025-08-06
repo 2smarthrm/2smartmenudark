@@ -61,13 +61,23 @@ export const SidePanel: React.FC<SidePanelProps> = ({ item, isOpen, onClose }) =
           <div className="flex-1 overflow-y-auto p-8">
             <div className="space-y-8">
               {/* Main Image */}
-              <div className="relative h-64 rounded-xl overflow-hidden">
+              <div className="relative h-80 rounded-xl overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                
+                {/* Image overlay with title */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    {item.title.replace('\n', ' ')}
+                  </h3>
+                  <p className="text-blue-400 font-medium text-sm">
+                    {item.subtitle} • {item.category}
+                  </p>
+                </div>
               </div>
 
               {/* Features List */}
