@@ -96,21 +96,33 @@ function AppContent() {
         </div>
 
         {/* Main Content Layout */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Left Side - Image */}
-          <div className="relative flex items-center">
-            {/* Left Arrow - Outside Image */}
-            <button
-              onClick={prevSlide}
-              className={`absolute -left-16 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
-                isDark
-                  ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700 border border-gray-700"
-                  : "bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-gray-200 shadow-lg"
-              }`}
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
+        <div className="relative mb-16">
+          {/* Left Arrow - Start of Section */}
+          <button
+            onClick={prevSlide}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
+              isDark
+                ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700 border border-gray-700"
+                : "bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-gray-200 shadow-lg"
+            }`}
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
 
+          {/* Right Arrow - End of Section */}
+          <button
+            onClick={nextSlide}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
+              isDark
+                ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700 border border-gray-700"
+                : "bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-gray-200 shadow-lg"
+            }`}
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center mx-16">
+            {/* Left Side - Image */}
             <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 relative group">
               <img
                 src={currentItem.image}
@@ -127,84 +139,72 @@ function AppContent() {
               </div>
             </div>
 
-            {/* Right Arrow - Outside Image */}
-            <button
-              onClick={nextSlide}
-              className={`absolute -right-16 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
-                isDark
-                  ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700 border border-gray-700"
-                  : "bg-white text-gray-600 hover:text-gray-900 hover:bg-gray-50 border border-gray-200 shadow-lg"
-              }`}
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
+            {/* Right Side - Content */}
+            <div className="space-y-8">
+              {/* Tags */}
+              <div className="flex gap-3">
+                <span
+                  className={`px-4 py-2 text-sm rounded-full border ${
+                    isDark
+                      ? "bg-blue-600/20 text-blue-400 border-blue-600/30"
+                      : "bg-blue-400/20 text-blue-500 border-blue-600/40"
+                  }`}
+                >
+                  {currentItem.subtitle}
+                </span>
+                <span
+                  className={`px-4 py-2 text-sm rounded-full border ${
+                    isDark
+                      ? "bg-gray-800/50 text-gray-300 border-gray-700"
+                      : "bg-gray-200/50 text-gray-700 border-gray-300"
+                  }`}
+                >
+                  {currentItem.category}
+                </span>
+              </div>
 
-          {/* Right Side - Content */}
-          <div className="space-y-8">
-            {/* Tags */}
-            <div className="flex gap-3">
-              <span
-                className={`px-4 py-2 text-sm rounded-full border ${
-                  isDark
-                    ? "bg-blue-600/20 text-blue-400 border-blue-600/30"
-                    : "bg-blue-400/20 text-blue-500 border-blue-600/40"
+              {/* Title */}
+              <h3
+                className={`text-2xl lg:text-3xl font-semibold ${
+                  isDark ? "text-white" : "text-gray-900"
                 }`}
               >
-                {currentItem.subtitle}
-              </span>
-              <span
-                className={`px-4 py-2 text-sm rounded-full border ${
-                  isDark
-                    ? "bg-gray-800/50 text-gray-300 border-gray-700"
-                    : "bg-gray-200/50 text-gray-700 border-gray-300"
+                {currentItem.description}
+              </h3>
+
+              {/* Description */}
+              <p
+                className={`text-lg leading-relaxed ${
+                  isDark ? "text-gray-400" : "text-gray-600"
                 }`}
               >
-                {currentItem.category}
-              </span>
+                Acompanhe as nossas comunicações importantes e novidades
+                preparadas especialmente para si. Desde promoções sazonais a
+                atualizações de serviços — partilhamos tudo aqui. Acompanhe as
+                nossas comunicações importantes.
+              </p>
+
+              {/* CTA Button */}
+              <button
+                onClick={() => handleSelectItem(currentItem)}
+                className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+              >
+                Saiba mais
+                <svg
+                  className="ml-2 w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
-
-            {/* Title */}
-            <h3
-              className={`text-2xl lg:text-3xl font-semibold ${
-                isDark ? "text-white" : "text-gray-900"
-              }`}
-            >
-              {currentItem.description}
-            </h3>
-
-            {/* Description */}
-            <p
-              className={`text-lg leading-relaxed ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              Acompanhe as nossas comunicações importantes e novidades
-              preparadas especialmente para si. Desde promoções sazonais a
-              atualizações de serviços — partilhamos tudo aqui. Acompanhe as
-              nossas comunicações importantes.
-            </p>
-
-            {/* CTA Button */}
-            <button
-              onClick={() => handleSelectItem(currentItem)}
-              className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-            >
-              Saiba mais
-              <svg
-                className="ml-2 w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
           </div>
         </div>
 
