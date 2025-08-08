@@ -17,6 +17,84 @@ function AppContent() {
   const [activeTab, setActiveTab] = useState("novidades");
   const [showLearningPage, setShowLearningPage] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentLogCategory, setCurrentLogCategory] = useState(0);
+
+  // Logs organizados por categoria
+  const logCategories = [
+    {
+      name: "Horários",
+      updates: [
+        { text: "Novo sistema de turnos flexíveis implementado", time: "há 1 hora", color: "bg-green-500" },
+        { text: "Correção no cálculo de horas extras", time: "há 3 horas", color: "bg-blue-500" },
+        { text: "Integração com calendário Outlook melhorada", time: "há 5 horas", color: "bg-orange-500" }
+      ]
+    },
+    {
+      name: "Planos de trabalho",
+      updates: [
+        { text: "Templates de planos personalizáveis adicionados", time: "há 2 horas", color: "bg-green-500" },
+        { text: "Sistema de aprovação automática otimizado", time: "há 4 horas", color: "bg-blue-500" },
+        { text: "Nova funcionalidade de duplicação de planos", time: "há 6 horas", color: "bg-orange-500" }
+      ]
+    },
+    {
+      name: "Produtividade",
+      updates: [
+        { text: "Dashboard de métricas em tempo real lançado", time: "há 30 min", color: "bg-green-500" },
+        { text: "Algoritmo de análise de performance melhorado", time: "há 2 horas", color: "bg-blue-500" },
+        { text: "Relatórios de produtividade automatizados", time: "há 4 horas", color: "bg-orange-500" }
+      ]
+    },
+    {
+      name: "Relatórios",
+      updates: [
+        { text: "Exportação para Excel com novos formatos", time: "há 1 hora", color: "bg-green-500" },
+        { text: "Filtros avançados nos relatórios mensais", time: "há 3 horas", color: "bg-blue-500" },
+        { text: "Gráficos interativos implementados", time: "há 5 horas", color: "bg-orange-500" }
+      ]
+    },
+    {
+      name: "Classificações",
+      updates: [
+        { text: "Sistema de avaliação 360° disponível", time: "há 45 min", color: "bg-green-500" },
+        { text: "Critérios de classificação personalizáveis", time: "há 2 horas", color: "bg-blue-500" },
+        { text: "Histórico de classificações melhorado", time: "há 4 horas", color: "bg-orange-500" }
+      ]
+    },
+    {
+      name: "Dispositivos",
+      updates: [
+        { text: "Suporte para novos tablets Android", time: "há 1 hora", color: "bg-green-500" },
+        { text: "Sincronização offline otimizada", time: "há 3 horas", color: "bg-blue-500" },
+        { text: "App iOS atualizado para versão 2.1", time: "há 5 horas", color: "bg-orange-500" }
+      ]
+    },
+    {
+      name: "Configurações Empresa",
+      updates: [
+        { text: "Gestão de permissões por departamento", time: "há 2 horas", color: "bg-green-500" },
+        { text: "Backup automático configurável", time: "há 4 horas", color: "bg-blue-500" },
+        { text: "Políticas de segurança atualizadas", time: "há 6 horas", color: "bg-orange-500" }
+      ]
+    },
+    {
+      name: "Outros",
+      updates: [
+        { text: "Interface de utilizador redesenhada", time: "há 1 hora", color: "bg-green-500" },
+        { text: "Performance geral do sistema melhorada", time: "há 3 horas", color: "bg-blue-500" },
+        { text: "Correções de bugs menores aplicadas", time: "há 5 horas", color: "bg-orange-500" }
+      ]
+    }
+  ];
+
+  // Rotação automática dos logs a cada 5 segundos
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLogCategory((prev) => (prev + 1) % logCategories.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [logCategories.length]);
 
   const handleSelectItem = (item: ContentItem) => {
     setSelectedItem(item);
@@ -76,39 +154,34 @@ function AppContent() {
             <h3 className={`text-sm font-semibold ${
               isDark ? 'text-white' : 'text-gray-900'
             }`}>
-              Atualizações Recentes
+              {logCategories[currentLogCategory].name}
             </h3>
-            <span className={`text-xs px-2 py-1 rounded-full ${
-              isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-100 text-blue-600'
-            }`}>
-              Live
-            </span>
+            <div className="flex gap-1">
+              {logCategories.map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-1.5 h-1.5 rounded-full transition-all ${
+                    index === currentLogCategory 
+                      ? (isDark ? 'bg-white' : 'bg-gray-900')
+                      : (isDark ? 'bg-gray-600' : 'bg-gray-400')
+                  }`}
+                />
+              ))}
+            </div>
           </div>
           <div className="space-y-2">
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className={`text-xs ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                Sistema de notificações otimizado • há 2 horas
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span className={`text-xs ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                Nova integração com Microsoft Teams • ontem
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-              <span className={`text-xs ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                Melhoria na performance dos relatórios • 2 dias
-              </span>
-            </div>
+            {logCategories[currentLogCategory].updates.map((update, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <div className={`w-2 h-2 ${update.color} rounded-full ${
+                  index === 0 ? 'animate-pulse' : ''
+                }`}></div>
+                <span className={`text-xs ${
+                  isDark ? 'text-gray-400' : 'text-gray-600'
+                }`}>
+                  {update.text} • {update.time}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
