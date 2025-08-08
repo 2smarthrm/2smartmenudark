@@ -68,6 +68,50 @@ function AppContent() {
 
     return (
       <div className="px-8 lg:px-16 py-8 h-full flex flex-col">
+        {/* Logs Section */}
+        <div className={`mb-6 p-4 rounded-xl border ${
+          isDark ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50/50 border-gray-200'
+        }`}>
+          <div className="flex items-center justify-between mb-3">
+            <h3 className={`text-sm font-semibold ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>
+              Atualizações Recentes
+            </h3>
+            <span className={`text-xs px-2 py-1 rounded-full ${
+              isDark ? 'bg-blue-600/20 text-blue-400' : 'bg-blue-100 text-blue-600'
+            }`}>
+              Live
+            </span>
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className={`text-xs ${
+                isDark ? 'text-gray-400' : 'text-gray-600'
+              }`}>
+                Sistema de notificações otimizado • há 2 horas
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span className={`text-xs ${
+                isDark ? 'text-gray-400' : 'text-gray-600'
+              }`}>
+                Nova integração com Microsoft Teams • ontem
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <span className={`text-xs ${
+                isDark ? 'text-gray-400' : 'text-gray-600'
+              }`}>
+                Melhoria na performance dos relatórios • 2 dias
+              </span>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="mb-8 max-w-4xl flex-shrink-0">
           <h1
@@ -233,16 +277,18 @@ function AppContent() {
         isDark ? "bg-black text-white" : "bg-white text-gray-900"
       }`}
     >
+      {/* Fixed Navigation - hide when showing learning page */}
+      {!showLearningPage && (
+        <div className="fixed top-0 left-0 right-0 z-30 bg-inherit border-b border-gray-200 dark:border-gray-800">
+          <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+        </div>
+      )}
+
       <div
         className={`transition-all duration-300 ${
           isPanelOpen ? "lg:mr-[500px]" : ""
-        }`}
+        } ${!showLearningPage ? "pt-20" : ""}`}
       >
-        {/* Navigation - hide when showing learning page */}
-        {!showLearningPage && (
-          <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
-        )}
-
         {/* Content */}
         {renderContent()}
       </div>
