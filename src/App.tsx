@@ -67,9 +67,9 @@ function AppContent() {
     const currentItem = contentItems[currentSlide];
 
     return (
-      <div className="px-8 lg:px-16 py-8">
+      <div className="px-8 lg:px-16 py-8 h-full flex flex-col">
         {/* Header */}
-        <div className="mb-16 max-w-4xl">
+        <div className="mb-8 max-w-4xl flex-shrink-0">
           <h1
             className={`text-3xl lg:text-4xl font-normal mb-6 ${
               isDark ? "text-white" : "text-gray-900"
@@ -96,7 +96,7 @@ function AppContent() {
         </div>
 
         {/* Main Content Layout */}
-        <div className="relative mb-16">
+        <div className="relative flex-1 flex items-center">
           {/* Left Arrow - Start of Section */}
           <button
             onClick={prevSlide}
@@ -121,7 +121,7 @@ function AppContent() {
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center mx-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-center mx-16 w-full">
             {/* Left Side - Image */}
             <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 relative group flex-shrink-0 transition-transform duration-300">
               <img
@@ -206,7 +206,7 @@ function AppContent() {
         </div>
 
         {/* Pagination Dots */}
-        <div className="flex justify-center gap-3">
+        <div className="flex justify-center gap-3 flex-shrink-0 mt-8">
           {contentItems.map((_, index) => (
             <button
               key={index}
