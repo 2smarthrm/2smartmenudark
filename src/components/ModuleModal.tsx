@@ -42,36 +42,36 @@ export const ModuleModal: React.FC<ModuleModalProps> = ({
     };
   }, [isOpen]);
   // dentro do ModuleModal.tsx (no topo do ficheiro)
-const toYouTubeEmbed = (url?: string) => {
-  if (!url) return undefined;
-  try {
-    // normaliza
-    const u = new URL(url);
-    // youtu.be/<id>
-    if (u.hostname.includes("youtu.be")) {
-      const id = u.pathname.replace("/", "");
-      return `https://www.youtube.com/embed/${id}`;
+  const toYouTubeEmbed = (url?: string) => {
+    if (!url) return undefined;
+    try {
+      // normaliza
+      const u = new URL(url);
+      // youtu.be/<id>
+      if (u.hostname.includes("youtu.be")) {
+        const id = u.pathname.replace("/", "");
+        return `https://www.youtube.com/embed/${id}`;
+      }
+      // youtube.com/watch?v=<id>
+      if (u.hostname.includes("youtube.com")) {
+        // /watch?v=...  ou /shorts/<id>  ou /embed/<id>
+        if (u.pathname === "/watch") {
+          const id = u.searchParams.get("v");
+          if (id) return `https://www.youtube.com/embed/${id}`;
+        }
+        if (u.pathname.startsWith("/shorts/")) {
+          const id = u.pathname.split("/")[2];
+          if (id) return `https://www.youtube.com/embed/${id}`;
+        }
+        if (u.pathname.startsWith("/embed/")) {
+          return url; // já é embed
+        }
+      }
+      return url; // fallback
+    } catch {
+      return url;
     }
-    // youtube.com/watch?v=<id>
-    if (u.hostname.includes("youtube.com")) {
-      // /watch?v=...  ou /shorts/<id>  ou /embed/<id>
-      if (u.pathname === "/watch") {
-        const id = u.searchParams.get("v");
-        if (id) return `https://www.youtube.com/embed/${id}`;
-      }
-      if (u.pathname.startsWith("/shorts/")) {
-        const id = u.pathname.split("/")[2];
-        if (id) return `https://www.youtube.com/embed/${id}`;
-      }
-      if (u.pathname.startsWith("/embed/")) {
-        return url; // já é embed
-      }
-    }
-    return url; // fallback
-  } catch {
-    return url;
-  }
-};
+  };
 
   React.useEffect(() => {
     // sempre que troca de módulo, parar vídeo
@@ -103,11 +103,11 @@ Cumprimentos,`;
   if (!isOpen || !module) return null;
 
   // monta a src do iframe com autoplay quando for para tocar
-const baseEmbed = toYouTubeEmbed(module.demoVideo);
-const iframeSrc =
-  baseEmbed && isVideoPlaying
-    ? `${baseEmbed}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
-    : undefined;
+  const baseEmbed = toYouTubeEmbed(module.demoVideo);
+  const iframeSrc =
+    baseEmbed && isVideoPlaying
+      ? `${baseEmbed}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+      : undefined;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
@@ -118,7 +118,7 @@ const iframeSrc =
 
       {/* Modal */}
       <div
-        className={`relative max-w-[90vw] max-w-4xl rounded-2xl overflow-hidden border mt-10 mb-10 ${
+        className={`relative max-w-[90vw] max-h-[88vh] max-w-4xl rounded-2xl overflow-hidden border mt-10 mb-10 ${
           isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-300"
         }`}
         role="dialog"
@@ -209,7 +209,9 @@ const iframeSrc =
                   ) : null}
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-sm rounded-full">
-                      {module.demoVideo ? "Demo Interativa" : "Pré‑visualização"}
+                      {module.demoVideo
+                        ? "Demo Interativa"
+                        : "Pré‑visualização"}
                     </span>
                   </div>
                 </>
@@ -367,10 +369,17 @@ const iframeSrc =
           }`}
         >
           <div className="flex items-center justify-between">
-            <div className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-              Implementação profissional • Suporte dedicado • Atualizações incluídas
+            <div
+              className={`text-sm ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              Implementação profissional • Suporte dedicado • Atualizações
+              incluídas
             </div>
-            <div className="text-sm text-gray-500">Exportech Portugal © 2024</div>
+            <div className="text-sm text-gray-500">
+              Exportech Portugal © 2024
+            </div>
           </div>
         </div>
       </div>
