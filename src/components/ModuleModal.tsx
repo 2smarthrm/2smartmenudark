@@ -1,8 +1,8 @@
 import React from "react";
-import { X, Play, Mail, Phone, CheckCircle, Star } from "lucide-react";
+import { X, Play, Mail, Phone, CheckCircle } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 
-interface Module {
+export interface Module {
   id: string;
   title: string;
   description: string;
@@ -11,6 +11,8 @@ interface Module {
   features: string[];
   demoImage: string;
   detailedDescription: string;
+  /** URL EMBED do YouTube, ex: https://www.youtube.com/embed/VIDEO_ID */
+  demoVideo?: string;
 }
 
 interface ModuleModalProps {
@@ -25,23 +27,61 @@ export const ModuleModal: React.FC<ModuleModalProps> = ({
   onClose,
 }) => {
   const { isDark } = useTheme();
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
 
+  // Bloqueia scroll do body quando modal aberto e reseta vídeo ao fechar/trocar módulo
   React.useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      setIsVideoPlaying(false);
     } else {
       document.body.style.overflow = "";
     }
-
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+  // dentro do ModuleModal.tsx (no topo do ficheiro)
+const toYouTubeEmbed = (url?: string) => {
+  if (!url) return undefined;
+  try {
+    // normaliza
+    const u = new URL(url);
+    // youtu.be/<id>
+    if (u.hostname.includes("youtu.be")) {
+      const id = u.pathname.replace("/", "");
+      return `https://www.youtube.com/embed/${id}`;
+    }
+    // youtube.com/watch?v=<id>
+    if (u.hostname.includes("youtube.com")) {
+      // /watch?v=...  ou /shorts/<id>  ou /embed/<id>
+      if (u.pathname === "/watch") {
+        const id = u.searchParams.get("v");
+        if (id) return `https://www.youtube.com/embed/${id}`;
+      }
+      if (u.pathname.startsWith("/shorts/")) {
+        const id = u.pathname.split("/")[2];
+        if (id) return `https://www.youtube.com/embed/${id}`;
+      }
+      if (u.pathname.startsWith("/embed/")) {
+        return url; // já é embed
+      }
+    }
+    return url; // fallback
+  } catch {
+    return url;
+  }
+};
+
+  React.useEffect(() => {
+    // sempre que troca de módulo, parar vídeo
+    setIsVideoPlaying(false);
+  }, [module?.id]);
 
   const handleRequestAccess = () => {
-    if (module) {
-      const subject = `Solicitação de Acesso - ${module.title}`;
-      const body = `Olá,
+    if (!module) return;
+    const subject = `Solicitação de Acesso - ${module.title}`;
+    const body = `Olá,
 
 Gostaria de solicitar acesso ao módulo "${module.title}" (${module.price}).
 
@@ -54,16 +94,20 @@ Por favor, enviem-me mais informações sobre:
 Aguardo o vosso contacto.
 
 Cumprimentos,`;
-
-      const mailtoLink = `mailto:helpdesk@2smart.pt?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoLink;
-    }
+    const mailtoLink = `mailto:helpdesk@2smart.pt?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
   };
 
   if (!isOpen || !module) return null;
 
+  // monta a src do iframe com autoplay quando for para tocar
+const baseEmbed = toYouTubeEmbed(module.demoVideo);
+const iframeSrc =
+  baseEmbed && isVideoPlaying
+    ? `${baseEmbed}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+    : undefined;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
@@ -74,9 +118,12 @@ Cumprimentos,`;
 
       {/* Modal */}
       <div
-        className={`relative w-full max-w-4xl rounded-2xl overflow-hidden border  ${
+        className={`relative w-full max-w-4xl rounded-2xl overflow-hidden border ${
           isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-300"
         }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Detalhes do módulo ${module.title}`}
       >
         {/* Header */}
         <div
@@ -97,8 +144,8 @@ Cumprimentos,`;
             <span
               className={`px-3 py-1 text-sm rounded-full border ${
                 isDark
-                  ? "bg-white/10 text-white-400 border-white/40"
-                  : "bg-black/10 rounded-full border border-black/30"
+                  ? "bg-white/10 text-white/80 border-white/30"
+                  : "bg-black/10 text-gray-900 border-black/20"
               }`}
             >
               {module.price}
@@ -120,34 +167,53 @@ Cumprimentos,`;
                 ? "bg-gray-800 text-gray-400 hover:text-white hover:bg-gray-700"
                 : "bg-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-300"
             }`}
+            aria-label="Fechar"
           >
             <X size={24} />
           </button>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 p-6">
-          {/* Left Column - Demo */}
+          {/* Left Column - Demo (vídeo ou imagem) */}
           <div className="space-y-6">
             <div
               className={`relative aspect-video rounded-xl overflow-hidden ${
                 isDark ? "bg-gray-800" : "bg-gray-200"
               }`}
             >
-              <img
-                src={module.demoImage}
-                alt={`${module.title} demo`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <button className="w-16 h-16 bg-blue-600/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-blue-500/90 transition-colors group">
-                  <Play className="w-6 h-6 text-white ml-1" />
-                </button>
-              </div>
-              <div className="absolute top-4 left-4">
-                <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-sm rounded-full">
-                  Demo Interativo
-                </span>
-              </div>
+              {iframeSrc ? (
+                <iframe
+                  className="w-full h-full"
+                  src={iframeSrc}
+                  title={module.title}
+                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <>
+                  <img
+                    src={module.demoImage}
+                    alt={`${module.title} demo`}
+                    className="w-full h-full object-cover"
+                  />
+                  {module.demoVideo ? (
+                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                      <button
+                        onClick={() => setIsVideoPlaying(true)}
+                        className="w-16 h-16 bg-blue-600/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-blue-500/90 transition-colors group"
+                        aria-label="Reproduzir vídeo"
+                      >
+                        <Play className="w-6 h-6 text-white ml-1" />
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-sm rounded-full">
+                      {module.demoVideo ? "Demo Interativa" : "Pré‑visualização"}
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Description */}
@@ -174,18 +240,6 @@ Cumprimentos,`;
                 {module.description}
               </p>
             </div>
-
-            {/* Rating */}
-            {/* <div className="flex items-center gap-2">
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <span className={`text-sm ${
-                isDark ? 'text-gray-400' : 'text-gray-600'
-              }`}>4.9/5 (127 avaliações)</span>
-            </div> */}
           </div>
 
           {/* Right Column - Features & Contact */}
@@ -297,11 +351,7 @@ Cumprimentos,`;
                   24 horas
                 </span>
               </p>
-              <p
-                className={`text-xs mt-1 ${
-                  isDark ? "text-gray-500" : "text-gray-500"
-                }`}
-              >
+              <p className={`text-xs mt-1 text-gray-500`}>
                 Demonstração personalizada disponível
               </p>
             </div>
@@ -317,23 +367,10 @@ Cumprimentos,`;
           }`}
         >
           <div className="flex items-center justify-between">
-            <div
-              className={`text-sm ${
-                isDark ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
-              <p>
-                Implementação profissional • Suporte dedicado • Atualizações
-                incluídas
-              </p>
+            <div className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}>
+              Implementação profissional • Suporte dedicado • Atualizações incluídas
             </div>
-            <div
-              className={`text-sm ${
-                isDark ? "text-gray-500" : "text-gray-500"
-              }`}
-            >
-              Exportech Portugal © 2024
-            </div>
+            <div className="text-sm text-gray-500">Exportech Portugal © 2024</div>
           </div>
         </div>
       </div>

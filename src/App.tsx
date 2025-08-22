@@ -14,87 +14,11 @@ function AppContent() {
   const { isDark } = useTheme();
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("novidades");
+  const [activeTab, setActiveTab] = useState<
+    "novidades" | "modulos" | "suporte"
+  >("novidades");
   const [showLearningPage, setShowLearningPage] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentLogCategory, setCurrentLogCategory] = useState(0);
-
-  // Logs organizados por categoria
-  const logCategories = [
-    {
-      name: "Horários",
-      updates: [
-        { text: "Novo sistema de turnos flexíveis implementado", time: "há 1 hora", color: "bg-green-500" },
-        { text: "Correção no cálculo de horas extras", time: "há 3 horas", color: "bg-blue-500" },
-        { text: "Integração com calendário Outlook melhorada", time: "há 5 horas", color: "bg-orange-500" }
-      ]
-    },
-    {
-      name: "Planos de trabalho",
-      updates: [
-        { text: "Templates de planos personalizáveis adicionados", time: "há 2 horas", color: "bg-green-500" },
-        { text: "Sistema de aprovação automática otimizado", time: "há 4 horas", color: "bg-blue-500" },
-        { text: "Nova funcionalidade de duplicação de planos", time: "há 6 horas", color: "bg-orange-500" }
-      ]
-    },
-    {
-      name: "Produtividade",
-      updates: [
-        { text: "Dashboard de métricas em tempo real lançado", time: "há 30 min", color: "bg-green-500" },
-        { text: "Algoritmo de análise de performance melhorado", time: "há 2 horas", color: "bg-blue-500" },
-        { text: "Relatórios de produtividade automatizados", time: "há 4 horas", color: "bg-orange-500" }
-      ]
-    },
-    {
-      name: "Relatórios",
-      updates: [
-        { text: "Exportação para Excel com novos formatos", time: "há 1 hora", color: "bg-green-500" },
-        { text: "Filtros avançados nos relatórios mensais", time: "há 3 horas", color: "bg-blue-500" },
-        { text: "Gráficos interativos implementados", time: "há 5 horas", color: "bg-orange-500" }
-      ]
-    },
-    {
-      name: "Classificações",
-      updates: [
-        { text: "Sistema de avaliação 360° disponível", time: "há 45 min", color: "bg-green-500" },
-        { text: "Critérios de classificação personalizáveis", time: "há 2 horas", color: "bg-blue-500" },
-        { text: "Histórico de classificações melhorado", time: "há 4 horas", color: "bg-orange-500" }
-      ]
-    },
-    {
-      name: "Dispositivos",
-      updates: [
-        { text: "Suporte para novos tablets Android", time: "há 1 hora", color: "bg-green-500" },
-        { text: "Sincronização offline otimizada", time: "há 3 horas", color: "bg-blue-500" },
-        { text: "App iOS atualizado para versão 2.1", time: "há 5 horas", color: "bg-orange-500" }
-      ]
-    },
-    {
-      name: "Configurações Empresa",
-      updates: [
-        { text: "Gestão de permissões por departamento", time: "há 2 horas", color: "bg-green-500" },
-        { text: "Backup automático configurável", time: "há 4 horas", color: "bg-blue-500" },
-        { text: "Políticas de segurança atualizadas", time: "há 6 horas", color: "bg-orange-500" }
-      ]
-    },
-    {
-      name: "Outros",
-      updates: [
-        { text: "Interface de utilizador redesenhada", time: "há 1 hora", color: "bg-green-500" },
-        { text: "Performance geral do sistema melhorada", time: "há 3 horas", color: "bg-blue-500" },
-        { text: "Correções de bugs menores aplicadas", time: "há 5 horas", color: "bg-orange-500" }
-      ]
-    }
-  ];
-
-  // Rotação automática dos logs a cada 5 segundos
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentLogCategory((prev) => (prev + 1) % logCategories.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [logCategories.length]);
 
   const handleSelectItem = (item: ContentItem) => {
     setSelectedItem(item);
@@ -106,85 +30,26 @@ function AppContent() {
     setTimeout(() => setSelectedItem(null), 300);
   };
 
-  const handleLearnClick = () => {
-    setShowLearningPage(true);
-  };
+  const handleLearnClick = () => setShowLearningPage(true);
+  const handleBackFromLearning = () => setShowLearningPage(false);
 
-  const handleBackFromLearning = () => {
-    setShowLearningPage(false);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % contentItems.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide(
-      (prev) => (prev - 1 + contentItems.length) % contentItems.length
-    );
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
+  const nextSlide = () => setCurrentSlide((p) => (p + 1) % contentItems.length);
+  const prevSlide = () =>
+    setCurrentSlide((p) => (p - 1 + contentItems.length) % contentItems.length);
+  const goToSlide = (i: number) => setCurrentSlide(i);
 
   const renderContent = () => {
-    if (showLearningPage) {
+    if (showLearningPage)
       return <LearningPage onBack={handleBackFromLearning} />;
-    }
-
-    if (activeTab === "modulos") {
-      return <ModulesPage />;
-    }
-
-    if (activeTab === "suporte") {
+    if (activeTab === "modulos") return <ModulesPage />;
+    if (activeTab === "suporte")
       return <SupportPage onLearnClick={handleLearnClick} />;
-    }
 
-    // Default: Novidades content
+    // Default: Novidades
     const currentItem = contentItems[currentSlide];
 
     return (
-      <div className="px-8 lg:px-16 py-8 h-full flex flex-col">
-        {/* Logs Section */}
-        <div className={`mb-6 p-4 rounded-xl border ${
-          isDark ? 'bg-gray-900/30 border-gray-800' : 'bg-gray-50/50 border-gray-200'
-        }`}>
-          <div className="flex items-center justify-between mb-3">
-            <h3 className={`text-sm font-semibold ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>
-              {logCategories[currentLogCategory].name}
-            </h3>
-            <div className="flex gap-1">
-              {logCategories.map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${
-                    index === currentLogCategory 
-                      ? (isDark ? 'bg-white' : 'bg-gray-900')
-                      : (isDark ? 'bg-gray-600' : 'bg-gray-400')
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="space-y-2">
-            {logCategories[currentLogCategory].updates.map((update, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <div className={`w-2 h-2 ${update.color} rounded-full ${
-                  index === 0 ? 'animate-pulse' : ''
-                }`}></div>
-                <span className={`text-xs ${
-                  isDark ? 'text-gray-400' : 'text-gray-600'
-                }`}>
-                  {update.text} • {update.time}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
+      <div className="px-8 lg:px-16 h-full flex flex-col mt-8">
         {/* Header */}
         <div className="mb-8 max-w-4xl flex-shrink-0">
           <h1
@@ -212,9 +77,9 @@ function AppContent() {
           </p>
         </div>
 
-        {/* Main Content Layout */}
+        {/* Main Content */}
         <div className="relative flex-1 flex items-center">
-          {/* Left Arrow - Start of Section */}
+          {/* Left Arrow */}
           <button
             onClick={prevSlide}
             className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
@@ -226,7 +91,7 @@ function AppContent() {
             <ChevronLeft className="w-6 h-6" />
           </button>
 
-          {/* Right Arrow - End of Section */}
+          {/* Right Arrow */}
           <button
             onClick={nextSlide}
             className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
@@ -238,17 +103,20 @@ function AppContent() {
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center mx-16 w-full">
-            {/* Left Side - Image */}
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 relative group flex-shrink-0 transition-transform duration-300">
+          <div className="grid lg:grid-cols-2 gap-12 mx-16 w-full">
+            {/* Left - Image */}
+            <div className="relative h-[500px] rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 group flex-shrink-0 transition-all duration-300">
+              {/* imagem ocupa 100% */}
               <img
                 src={currentItem.image}
                 alt={currentItem.title}
-                className="w-full h-full object-cover transition-transform duration-300"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/60" />
 
-              {/* Title Overlay */}
+              {/* overlay de gradiente de baixo para cima */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-white/5 to-transparent" />
+
+              {/* título */}
               <div className="absolute bottom-8 left-8 right-8">
                 <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
                   {currentItem.title}
@@ -256,9 +124,8 @@ function AppContent() {
               </div>
             </div>
 
-            {/* Right Side - Content */}
+            {/* Right - Text */}
             <div className="space-y-8 flex-shrink-0">
-              {/* Tags */}
               <div className="flex gap-3">
                 <span
                   className={`px-4 py-2 text-sm rounded-full border ${
@@ -280,7 +147,6 @@ function AppContent() {
                 </span>
               </div>
 
-              {/* Title */}
               <h3
                 className={`text-2xl lg:text-3xl font-semibold ${
                   isDark ? "text-white" : "text-gray-900"
@@ -289,7 +155,6 @@ function AppContent() {
                 {currentItem.description}
               </h3>
 
-              {/* Description */}
               <p
                 className={`text-lg leading-relaxed ${
                   isDark ? "text-gray-400" : "text-gray-600"
@@ -298,7 +163,6 @@ function AppContent() {
                 {currentItem.content}
               </p>
 
-              {/* CTA Button */}
               <button
                 onClick={() => handleSelectItem(currentItem)}
                 className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
@@ -322,7 +186,8 @@ function AppContent() {
           </div>
         </div>
 
-        {/* Pagination Dots */}
+        {/* Dots */}
+        <br />
         <div className="flex justify-center gap-3 flex-shrink-0 mt-8">
           {contentItems.map((_, index) => (
             <button
@@ -340,6 +205,7 @@ function AppContent() {
             />
           ))}
         </div>
+        <br />
       </div>
     );
   };
@@ -350,7 +216,7 @@ function AppContent() {
         isDark ? "bg-black text-white" : "bg-white text-gray-900"
       }`}
     >
-      {/* Fixed Navigation - hide when showing learning page */}
+      {/* Top Nav */}
       {!showLearningPage && (
         <div className="fixed top-0 left-0 right-0 z-30 bg-inherit border-b border-gray-200 dark:border-gray-800">
           <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
@@ -362,11 +228,10 @@ function AppContent() {
           isPanelOpen ? "lg:mr-[500px]" : ""
         } ${!showLearningPage ? "pt-20" : ""}`}
       >
-        {/* Content */}
         {renderContent()}
       </div>
 
-      {/* Side Panel - only show for novidades tab and not on learning page */}
+      {/* Side Panel só nas novidades */}
       {activeTab === "novidades" && !showLearningPage && (
         <SidePanel
           item={selectedItem}

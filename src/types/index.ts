@@ -1,3 +1,9 @@
+export interface CTA {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary';
+}
+
 export interface ContentItem {
   id: string;
   title: string;
@@ -7,5 +13,11 @@ export interface ContentItem {
   tags: string[];
   image: string;
   content: string;
-  features: string[];
+
+  // Pode ser lista de strings OU grupos com { title, items }
+  // (mantém o que já tens)
+  features: any[];
+
+  // NOVO (opcional): só aparece se definido
+  cta?: CTA | CTA[];
 }

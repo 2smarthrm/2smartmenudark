@@ -30,7 +30,7 @@ const LearningCard: React.FC<LearningCardProps> = ({ title, subtitle, descriptio
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         
         {/* Play Button Overlay */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -81,46 +81,53 @@ const LearningCard: React.FC<LearningCardProps> = ({ title, subtitle, descriptio
 
 const learningContent = [
   {
-    title: 'Chegadas e saídas automáticas com Geofence',
-    subtitle: 'Localização',
-    description: 'Ativa ações automáticas com base na localização do teu smartphone. O 2smart detecta quando entras ou sais de uma área definida - ideal para automatizar rotinas sem mexer no app.',
-    image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Localização', 'Automatização']
+    title: 'Adicionar um Novo Colaborador',
+    subtitle: 'Colaborador',
+    description: 'Saiba como criar um novo perfil de colaborador no 2smart, garantindo acesso seguro e personalizado às funcionalidades.',
+    image: 'https://i.imgur.com/vFAX1Ow.png',
+    tags: ['Colaborador'
+    ],
+    videoUrl:'https://www.youtube.com/watch?v=0iT6u8b8bPE'
   },
   {
-    title: 'Chegadas e saídas automáticas com Geofence',
-    subtitle: 'Localização',
-    description: 'Ativa ações automáticas com base na localização do teu smartphone. O 2smart detecta quando entras ou sais de uma área definida - ideal para automatizar rotinas sem mexer no app.',
-    image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Localização', 'Automatização']
+    title: 'Atribuir Planos de Trabalho',
+    subtitle: 'Atribuição',
+    description: 'Aprenda a definir e atribuir planos de trabalho a cada colaborador, otimizando a organização e o desempenho da equipa.',
+    image: 'https://i.imgur.com/43yHLBj.png',
+    tags: ['Planos', 'Trabalho'],
+    videoUrl:'https://youtu.be/WnFP4Y2hYoU'
+  },
+   {
+    title: 'Instalar o 2smart App',
+    subtitle: 'Webapp',
+    description: 'Siga o guia passo a passo para instalar a WebApp do 2smart no seu dispositivo e aceder de forma rápida e otimizada.',
+    image: 'https://i.imgur.com/Y6wWOfL.jpeg',
+    tags: ['WebApp'],
+     videoUrl:'https://youtube.com/shorts/z2M2L5p1BPo'
   },
   {
-    title: 'Chegadas e saídas automáticas com Geofence',
-    subtitle: 'Localização',
-    description: 'Ativa ações automáticas com base na localização do teu smartphone. O 2smart detecta quando entras ou sais de uma área definida - ideal para automatizar rotinas sem mexer no app.',
-    image: 'https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Localização', 'Automatização']
+    title: 'Enviar Colaboradores para Terminais',
+    subtitle: 'Terminais',
+    description: 'Descubra como associar colaboradores a terminais específicos, garantindo acesso controlado e eficiente aos recursos.',
+    image: 'https://i.imgur.com/3Jue5G8.png',
+    tags: ['Terminais', 'Colaborador'],
+     videoUrl:'https://youtu.be/jHJ3AJXAs7c'
   },
   {
-    title: 'Controlo de Dispositivos Inteligentes',
-    subtitle: 'Automação',
-    description: 'Aprende a controlar todos os teus dispositivos smart de forma centralizada. Desde luzes a termostatos, tudo numa só aplicação.',
-    image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Automação', 'Dispositivos']
+    title: 'Terminar Contrato de Colaborador',
+    subtitle: 'Contrato',
+    description: 'Aprenda a encerrar o contrato de um colaborador no 2smart, revogando o acesso e atualizando automaticamente os registos.',
+    image: 'https://i.imgur.com/QTlQEtT.png',
+    tags: ['Contrato', 'Colaborador'],
+     videoUrl:'https://youtu.be/xRbJDEI-oqM'
   },
   {
-    title: 'Configuração de Rotinas Personalizadas',
-    subtitle: 'Personalização',
-    description: 'Cria rotinas personalizadas que se adaptam ao teu estilo de vida. Automatiza tarefas diárias e poupa tempo e energia.',
-    image: 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Personalização', 'Rotinas']
-  },
-  {
-    title: 'Monitorização em Tempo Real',
-    subtitle: 'Monitorização',
-    description: 'Acompanha o estado dos teus dispositivos em tempo real. Recebe notificações e mantém-te sempre informado.',
-    image: 'https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg?auto=compress&cs=tinysrgb&w=800',
-    tags: ['Monitorização', 'Tempo Real']
+    title: 'Configurar Horários de Trabalho',
+    subtitle: 'Horario',
+    description: 'Saiba como definir, ajustar e gerir os horários de trabalho dos colaboradores, assegurando sincronização com o sistema',
+    image: 'https://i.imgur.com/uDqZSbe.png',
+    tags: ['Horarios','Trabalho'],
+     videoUrl:'https://youtu.be/5VkKtHCsOYA'
   }
 ];
 
@@ -254,10 +261,11 @@ export const LearningPage: React.FC<LearningPageProps> = ({ onBack }) => {
 
       {/* Video Player Modal */}
       <VideoPlayerModal
-        isOpen={isVideoModalOpen}
-        onClose={handleCloseVideoModal}
-        videoTitle={selectedVideo?.title || ''}
-      />
+  isOpen={isVideoModalOpen}
+  onClose={handleCloseVideoModal}
+  videoTitle={selectedVideo?.title || ''}
+  videoUrl={selectedVideo?.videoUrl}
+/>
     </div>
   );
 };
