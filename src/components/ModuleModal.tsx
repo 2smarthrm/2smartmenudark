@@ -173,11 +173,11 @@ Cumprimentos,`;
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 p-6">
+        <div className="grid lg:grid-cols-2 gap-7 p-6">
           {/* Left Column - Demo (vídeo ou imagem) */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             <div
-              className={`relative aspect-video rounded-xl overflow-hidden ${
+              className={`relative aspect-video rounded-xl overflow-hidden w-full max-w-[95%] ${
                 isDark ? "bg-gray-800" : "bg-gray-200"
               }`}
             >
@@ -245,7 +245,7 @@ Cumprimentos,`;
           </div>
 
           {/* Right Column - Features & Contact */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             {/* Features */}
             <div>
               <h3
@@ -278,13 +278,13 @@ Cumprimentos,`;
               }`}
             >
               <h3
-                className={`text-lg font-semibold mb-3 ${
+                className={`text-lg font-semibold mb-2 ${
                   isDark ? "text-white" : "text-gray-900"
                 }`}
               >
                 Informações de Preço
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <div className="flex justify-between">
                   <span className={isDark ? "text-gray-400" : "text-gray-600"}>
                     Preço Base:
