@@ -118,7 +118,7 @@ const iframeSrc =
 
       {/* Modal */}
       <div
-        className={`relative w-full max-w-4xl rounded-2xl overflow-hidden border ${
+        className={`relative max-w-[90vw] max-w-4xl rounded-2xl overflow-hidden border mt-10 mb-10 ${
           isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-300"
         }`}
         role="dialog"
