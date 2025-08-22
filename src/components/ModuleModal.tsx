@@ -118,7 +118,7 @@ Cumprimentos,`;
 
       {/* Modal */}
       <div
-        className={`relative max-w-[90vw] max-h-[88vh] max-w-4xl rounded-2xl overflow-hidden border mt-10 mb-10 ${
+        className={`relative max-w-[90vw] max-h-[90vh] max-w-4xl rounded-2xl overflow-hidden border mt-10 mb-10 ${
           isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-300"
         }`}
         role="dialog"
@@ -228,14 +228,14 @@ Cumprimentos,`;
                 Sobre este Módulo
               </h3>
               <p
-                className={`leading-relaxed mb-4 ${
+                className={`leading-snug mb-4 ${
                   isDark ? "text-gray-400" : "text-gray-600"
                 }`}
               >
                 {module.detailedDescription}
               </p>
               <p
-                className={`leading-relaxed ${
+                className={`leading-none ${
                   isDark ? "text-gray-400" : "text-gray-600"
                 }`}
               >
