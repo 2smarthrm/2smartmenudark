@@ -57,23 +57,15 @@ function AppContent() {
               isDark ? "text-white" : "text-gray-900"
             }`}
           >
-            O que a 2Smart tem de novidades e campanhas!
+            2Smart HR – What’s New?
           </h1>
           <p
             className={`text-base leading-relaxed mb-2 ${
               isDark ? "text-gray-400" : "text-gray-600"
             }`}
           >
-            Acompanhe as nossas comunicações importantes e novidades preparadas
-            especialmente para si.
-          </p>
-          <p
-            className={`text-base leading-relaxed ${
-              isDark ? "text-gray-400" : "text-gray-600"
-            }`}
-          >
-            Desde promoções sazonais a atualizações de serviços — partilhamos
-            tudo aqui.
+            A Plataforma 2Smart HR cresce diariamente, acompanhe todas as
+            novidades e comunicações desenhadas especialmente para si!
           </p>
         </div>
 
@@ -125,10 +117,10 @@ function AppContent() {
             </div>
 
             {/* Right - Text */}
-            <div className="space-y-8 flex-shrink-0">
+            <div className="space-y-8 flex-shrink-0 text-justify">
               <div className="flex gap-3">
                 <span
-                  className={`px-4 py-2 text-sm rounded-full border ${
+                  className={`px-4 py-2 text-sm rounded-full border  ${
                     isDark
                       ? "bg-blue-600/20 text-blue-400 border-blue-600/30"
                       : "bg-blue-400/20 text-blue-500 border-blue-600/40"
@@ -155,13 +147,24 @@ function AppContent() {
                 {currentItem.description}
               </h3>
 
-              <p
-                className={`text-lg leading-relaxed ${
+              {/* Texto (suporta string, string[] ou vazio) */}
+              <div
+                className={`${
                   isDark ? "text-gray-400" : "text-gray-600"
-                }`}
+                } space-y-4`}
               >
-                {currentItem.content}
-              </p>
+                {(Array.isArray(currentItem.content)
+                  ? currentItem.content
+                  : (currentItem.content ?? "")
+                      .split(/\n\s*\n/) // separa por LINHA EM BRANCO (com ou sem espaços)
+                      .map((s) => s.trim())
+                      .filter(Boolean)
+                ).map((p, i) => (
+                  <p key={i} className="text-lg leading-relaxed text-justify">
+                    {p}
+                  </p>
+                ))}
+              </div>
 
               <button
                 onClick={() => handleSelectItem(currentItem)}

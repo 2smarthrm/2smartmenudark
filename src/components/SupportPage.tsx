@@ -3,9 +3,9 @@ import { Play, Info, Bug, Phone, Mail, Globe } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 
 const supportOptions = [
-  { id: "learn",  title: "Aprender a usar o 2SMART", icon: Play },
-  { id: "info",   title: "Centro de Informações 2SMART", icon: Info },
-  { id: "report", title: "Reportar Erro 2Smart", icon: Bug },
+  { id: "learn",  title: "Aprender a usar o 2Smart HR", icon: Play },
+  { id: "info",   title: "Centro de Informações 2Smart HR", icon: Info },
+  { id: "report", title: "Reportar Erro 2Smart HR", icon: Bug },
 ];
 
 const contactInfo = [
@@ -49,13 +49,10 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onLearnClick }) => {
           {/* Header */}
           <div className="mb-16">
             <h1 className={`text-3xl lg:text-4xl font-normal mb-6 ${isDark ? "text-white" : "text-gray-900"}`}>
-              O que o 2Smart tem de novidades e campanhas!
+              2Smart HR - Power to You!
             </h1>
             <p className={`text-base leading-relaxed mb-2 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-              Acompanhe as nossas comunicações importantes e novidades preparadas especialmente para si.
-            </p>
-            <p className={`text-base leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-              Desde promoções sazonais a atualizações de serviços — partilhamos tudo aqui.
+              O Suporte Técnico da Plataforma 2Smart HR está sempre ao alcance. Conheça funcionalidades, vídeos demonstrativos e efetue download da documentação de suporte 2Smart HR.
             </p>
           </div>
 

@@ -34,6 +34,56 @@ export const contentItems: ContentItem[] = [
     image: "https://i.imgur.com/1ngYvZB.jpeg",
     content:
       "Já está disponível a nova funcionalidade de Geolocalização & Geofencing! Agora é possível acompanhar, em tempo real, a localização das equipas no terreno, definir zonas geográficas específicas e receber alertas automáticos sempre que há entradas ou saídas dessas zonas. Uma ferramenta poderosa para melhorar o controlo operacional e a gestão de recursos em mobilidade.",
+    blocks: [
+      {
+        type: "image",
+        src: "https://ik.imagekit.io/fsobpyaa5i/Group%2030471%20(1).png",
+        alt: "Mapa e geofencing",
+      },
+      { type: "heading", level: 2, text: "Geofencing na Gestão de Equipas" },
+      {
+        type: "text",
+        text: "A tecnologia de geofencing permite automatizar o controlo de presenças com base em zonas geográficas pré-definidas. Sempre que um colaborador entra ou sai dessas zonas, o sistema reconhece a localização e regista o evento de forma automática e segura.",
+      },
+      { type: "heading", level: 3, text: "Como funciona o geofencing" },
+      {
+        type: "text",
+        text: "A tecnologia de geofencing permite automatizar o controlo de presenças com base em zonas geográficas pré-definidas. Sempre que um colaborador entra ou sai dessas zonas, o sistema reconhece a localização e regista o evento de forma automática e segura.",
+      },
+      {
+        type: "image",
+        src: "https://ik.imagekit.io/fsobpyaa5i/Group%2030472%20(1).png",
+        alt: "Mapa e geofencing",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Vantagens para empresas e colaboradores",
+      },
+      {
+        type: "text",
+        text: "O geofencing oferece mais do que automatização: promove a confiança, reduz erros e facilita a mobilidade das equipas. É uma solução ideal para empresas com operações descentralizadas, trabalhos externos ou locais com múltiplas unidades.",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Mais controlo, menos esforço manual",
+      },
+      {
+        type: "text",
+        text: "Ao definir zonas de atuação no mapa, é possível saber com precisão quando um colaborador chegou ao local de trabalho, iniciou uma atividade ou terminou o turno. Tudo é registado automaticamente, sem depender de validações manuais ou supervisores.",
+      },
+      {
+        type: "image",
+        src: "https://i.imgur.com/1ngYvZB.jpeg",
+        alt: "Mapa e geofencing",
+      },
+    ],
+    cta: {
+      label: "Veja Mais",
+      href: "https://www.2smart.pt/contactos",
+      variant: "primary",
+    },
     features: [
       "Visualização de dados em tempo real",
       "Criação de dashboard personalizado",
@@ -42,6 +92,7 @@ export const contentItems: ContentItem[] = [
       "Capacidades de exportação",
     ],
   },
+
   {
     id: "3",
     title: "Lançamento 2Smart App",
@@ -51,7 +102,7 @@ export const contentItems: ContentItem[] = [
     tags: ["Mobile", "Responsivo", "Performance"],
     image: "https://i.imgur.com/NN1FW1X.jpeg",
     content:
-      "A 2Smart HR chegou ao telemóvel! A nova 2Smart App, disponível para Android e iOS, permite aos colaboradores efectuar registos de presença, consultar horários, submeter pedidos e aceder a documentos — tudo de forma simples, prática e integrada com o sistema principal. Uma aplicação pensada para facilitar o dia a dia de quem está no terreno.",
+      "O 2Smart HR chegou ao telemóvel! A nova 2Smart App, disponível para Android e iOS, permite aos colaboradores efectuar registos de presença, consultar horários, submeter pedidos e aceder a documentos — tudo de forma simples, prática e integrada com o sistema principal. Uma aplicação pensada para facilitar o dia a dia de quem está no terreno.",
     features: [
       "Performance móvel nativa",
       "Funcionalidade offline",
@@ -68,15 +119,77 @@ export const contentItems: ContentItem[] = [
     category: "Gestão",
     tags: ["Cloud", "Escalável", "Confiável"],
     image: "https://i.imgur.com/ifsHItW.jpeg",
-    content:
-      "Sabia que a 2Smart HR já dispõe de um módulo de exportação para ERP? Esta funcionalidade permite exportar dados de forma estruturada para o seu sistema de contabilidade ou gestão financeira. Fale connosco para saber como pode tirar partido desta integração!",
-    features: [
-      "Garantia de 99.9% de uptime",
-      "Dimensionamento automático",
-      "Entrega de conteúdo global",
-      "Segurança empresarial",
-      "Recuperação de desastres",
+    content: [
+      "Processamento Salarial Automatizado com a integração com o 2Smart HR.",
+      "Sabia que o 2Smart HR permite integrar as Assiduidades com o seu ERP para processamento salarial automatizado? O novo módulo de exportação para ERP permite integrar de forma automatizada as Assiduidades, Absenteísmo, Férias e outros para que o processamento salarial seja simplificado de forma totalmente automatizada. Fale com a nossa Equipa 2Smart HR para obter mais informações.",
     ],
+    blocks: [
+      {
+        type: "image",
+        src: "https://ik.imagekit.io/fsobpyaa5i/Frame%205%20(2).png",
+        alt: "ERP",
+      },
+      { type: "heading", level: 2, text: "2Smart SaaS: RH e Assiduidade Integrados" },
+      {
+        type: "text",
+        text: "O 2Smart HR permite gerir todos os dados de Recursos Humanos e exportá-los diretamente para qualquer sistema ERP de forma automática. Desde assiduidade, horas extras, faltas e férias, tudo é sincronizado em tempo real, garantindo informação precisa para a tomada de decisões estratégicas",
+      },
+      { type: "heading", level: 3, text: "Principais Funcionalidades" },
+      {
+        type: "text",
+        text: "Exportação automática de assiduidade e horários para ERP, Envio direto de mapa de horas extras, faltas e férias, Relatórios detalhados prontos para integração, Atualização em tempo real de todos os indicadores, Redução de tarefas manuais e erros de lançamento, Compatibilidade com qualquer sistema de gestão/ERP.",
+      },
+      {
+        type: "image",
+        src: "https://ik.imagekit.io/fsobpyaa5i/Frame%206.png",
+        alt: "ERP",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Gestão Integrada e Automatizada",
+      },
+      {
+        type: "text",
+        text: "A plataforma oferece exportação automática de assiduidade, horas extras, faltas e férias para ERP, além de relatórios detalhados e indicadores sempre atualizados. Tudo num ambiente digital seguro, centralizando dados e reduzindo tarefas manuais.",
+      },
+      {
+        type: "image",
+        src: "https://ik.imagekit.io/fsobpyaa5i/Group%2030489.png",
+        alt: "ERP",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Lista de ERP's",
+      },
+      {
+        type: "topics",
+        items: [
+          "Eticadata",
+          "Alidata",
+          "Primavera",
+          "Sage",
+          "Microsoft Dynamics",
+          "Artsoft Business Software",
+          "AIRC",
+          "Gestware",
+          "PHC",
+          "SAP",
+          "F3M",
+          "Meta4"
+        ],
+      },
+      {
+        type: "text",
+        text: "Não encontra o seu ERP? Não se preocupe, nós integramos",
+      },
+    ],
+    cta: {
+      label: "Fale Connosco",
+      href: "https://www.2smart.pt/contactos",
+      variant: "primary",
+    },
   },
   {
     id: "5",
@@ -88,12 +201,41 @@ export const contentItems: ContentItem[] = [
     image: "https://i.imgur.com/torJmpd.jpeg",
     content:
       "Tem necessidades específicas? Pode comunicar facilmente com a nossa equipa técnica e solicitar desenvolvimentos personalizados, adaptados às necessidades específicas da sua empresa.",
-    features: [
-      "Recomendações inteligentes",
-      "Fluxos de trabalho automatizados",
-      "Análises preditivas",
-      "Processamento de linguagem natural",
-      "Otimização de machine learning",
+    blocks: [
+      {
+        type: "image",
+        src: "https://ik.imagekit.io/fsobpyaa5i/Group%2030481%20(1).png",
+        alt: "Solução",
+      },
+      { type: "heading", level: 2, text: "Soluções 2Smart HR à medida de cada cliente" },
+      {
+        type: "text",
+        text: "Na Plataforma 2Smart HR acreditamos que cada organização tem a sua própria realidade e desafios específicos. Por isso, a nossa solução não se limita ao standard — estamos preparados para adaptar, personalizar e desenvolver o que for necessário para responder integralmente às necessidades dos nossos clientes.",
+      },
+      { type: "heading", level: 3, text: "Desenvolvimento Personalizado" },
+      {
+        type: "text",
+        text: "Seja através de novos relatórios, módulos adicionais ou funcionalidades específicas, a nossa equipa dedica-se a encontrar a melhor solução para cada situação. Trabalhamos lado a lado com os clientes para garantir que o software acompanha verdadeiramente a dinâmica do seu negócio.",
+      },
+      {
+        type: "image",
+        src: "https://ik.imagekit.io/fsobpyaa5i/Group%2030480.png",
+        alt: "Solução",
+      },
+      {
+        type: "heading",
+        level: 3,
+        text: "Equipa Dedicada às Suas Necessidades",
+      },
+      {
+        type: "text",
+        text: "A equipa 2Smart HR está sempre disponível para escutar, analisar e propor caminhos de evolução. A nossa prioridade é alinhar a tecnologia com os objetivos de cada organização, assegurando que cada desenvolvimento acrescenta valor real ao dia a dia.",
+      },
+      {
+        type: "image",
+        src: "https://i.imgur.com/torJmpd.jpeg",
+        alt: "Solução",
+      },
     ],
   },
   {
@@ -101,14 +243,14 @@ export const contentItems: ContentItem[] = [
     title: "Melhorias e Novas Funcionalidades",
     subtitle: "Updates",
     description:
-      "Acompanhe todas as atualizações, melhorias e registos de alterações do sistema",
+      "Acompanhe todas as Atualizações, Melhorias e Novidades da Plataforma 2SMART",
     category: "Logs",
     tags: ["Atualizações", "Melhorias", "Logs"],
     image:
       // "https://i.imgur.com/ORfyaeS.png",
       "https://i.imgur.com/9eusHry.png",
     content:
-      "Este módulo permite-lhe manter-se informado sobre todas as novidades e alterações do sistema. Consulte os registos de atualizações, visualize melhorias implementadas e conheça as novas funcionalidades adicionadas.",
+      "Neste separador poderá consultar todas as novidades e novas funcionalidades disponibilizadas no 2Smart HR. Um espaço simples e rápido para que esteja sempre a par das melhorias que vão sendo introduzidas na solução.",
     features: [
       {
         title: "Horários",
@@ -122,7 +264,6 @@ export const contentItems: ContentItem[] = [
       {
         title: "Planos de trabalho",
         items: [
-          "Correção do bug na apresentação do relatório da atribuição (execução correta mas relatório, por vezes, indicava erro) - 12/05/2025",
           "Apresentação de relatório com resumo da atribuição e indicação de sucesso/insucesso - 06/04/2025",
           "Definição de tolerância para pausas intermédias quando previstas nos horários - 18/02/2025",
           "Criação de planos de trabalho com objetivo semanal - 18/02/2025",

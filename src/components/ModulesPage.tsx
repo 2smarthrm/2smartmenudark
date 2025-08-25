@@ -324,9 +324,7 @@ export const ModulesPage: React.FC = () => {
             isDark ? "text-gray-400" : "text-gray-600"
           }`}
         >
-          Escolha os módulos que melhor se adequam às necessidades da sua
-          empresa. Cada módulo é desenvolvido com tecnologia de ponta e pode ser
-          personalizado.
+          A Plataforma 2Smart HR dispõe de vários módulos opcionais que podem ser contratados para integrar novas funcionalidades assim como Relatórios que lhe permitem efetuar análises mais segmentadas e abrangendo informações que não constam da versão base do 2Smart HR.
         </p>
       </div>
 

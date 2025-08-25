@@ -11,8 +11,13 @@ export interface Module {
   features: string[];
   demoImage: string;
   detailedDescription: string;
-  /** URL EMBED do YouTube, ex: https://www.youtube.com/embed/VIDEO_ID */
   demoVideo?: string;
+
+  /** Opcional: força o template de preços */
+  pricingType?: "module" | "report";
+
+  /** Opcional: substitui linhas default por estas */
+  pricingRows?: Array<{ label: string; value: string }>;
 }
 
 interface ModuleModalProps {
@@ -108,6 +113,33 @@ Cumprimentos,`;
     baseEmbed && isVideoPlaying
       ? `${baseEmbed}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
       : undefined;
+  // Decide o template de preços (por categoria ou override)
+  const kind: "module" | "report" =
+    module.pricingType ??
+    (/relat[óo]rio/i.test(module.category) ? "report" : "module");
+
+  // Linhas por defeito de cada template
+  const defaultRowsByKind: Record<
+    "module" | "report",
+    Array<{ label: string; value: string }>
+  > = {
+    module: [
+      { label: "Preço Base", value: module.price },
+      { label: "Setup", value: "Gratuito" },
+      { label: "Suporte", value: "De acordo com o SLA Contratado" },
+      { label: "Teste Gratuito", value: "Disponível" },
+    ],
+    report: [
+      { label: "Preço Base", value: module.price },
+      { label: "Setup", value: "Gratuito" },
+      { label: "Implementação", value: "Imediata" },
+      { label: "Teste Gratuito", value: "Disponível" },
+    ],
+  };
+
+  // Se vierem rows personalizadas no module, usamos essas; senão o template
+  const pricingRows = module.pricingRows ?? defaultRowsByKind[kind];
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
@@ -228,7 +260,7 @@ Cumprimentos,`;
                 Sobre este Módulo
               </h3>
               <p
-                className={`leading-snug mb-4 ${
+                className={`leading-snug mb-4 text-justify ${
                   isDark ? "text-gray-400" : "text-gray-600"
                 }`}
               >
@@ -282,39 +314,32 @@ Cumprimentos,`;
                   isDark ? "text-white" : "text-gray-900"
                 }`}
               >
-                Informações de Preço
+                {kind === "report"
+                  ? "Informações de Preço (Relatório)"
+                  : "Informações de Preço (Módulo)"}
               </h3>
+
               <div className="space-y-1">
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                    Preço Base:
-                  </span>
-                  <span
-                    className={`font-semibold ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    {module.price}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                    Setup:
-                  </span>
-                  <span className="text-blue-600">Gratuito</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                    Suporte:
-                  </span>
-                  <span className="text-blue-600">24/7 Incluído</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                    Teste Gratuito:
-                  </span>
-                  <span className="text-blue-600">30 dias</span>
-                </div>
+                {pricingRows.map((row, i) => (
+                  <div key={i} className="flex justify-between">
+                    <span
+                      className={isDark ? "text-gray-400" : "text-gray-600"}
+                    >
+                      {row.label}:
+                    </span>
+                    <span
+                      className={
+                        i === 0
+                          ? `font-semibold ${
+                              isDark ? "text-white" : "text-gray-900"
+                            }`
+                          : "text-blue-600"
+                      }
+                    >
+                      {row.value}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
