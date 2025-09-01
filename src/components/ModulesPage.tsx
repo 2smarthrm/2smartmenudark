@@ -28,6 +28,7 @@ interface Module {
   demoImage: string;
   demoVideo?: string;
   detailedDescription: string;
+  note?: string;
 }
 
 const modules: Module[] = [
@@ -36,7 +37,7 @@ const modules: Module[] = [
     title: "Mapa Resumo de Assiduidade e Subsídios",
     description:
       "Veja, num só mapa, todas as horas, faltas, férias e subsídios dos seus colaboradores.",
-    price: "€19/mês",
+    price: "8€/mês",
     icon: BarChart3,
     category: "Relatórios",
     features: [
@@ -55,7 +56,7 @@ const modules: Module[] = [
     title: "Mapa de Resumo de Assiduidade de Empresas Externas",
     description:
       "Resumo de assiduidade dedicado a colaboradores de empresas externas.",
-    price: "€149/mês",
+    price: "8€/mês",
     icon: Users,
     category: "Relatórios",
     features: [
@@ -73,7 +74,7 @@ const modules: Module[] = [
     id: "assiduidade",
     title: "Mapa Resumo de Assiduidade",
     description: "Resumo de assiduidade sem horas noturnas.",
-    price: "€199/mês",
+    price: "8€/mês",
     icon: CalendarCheck,
     category: "Relatórios",
     features: [
@@ -92,7 +93,7 @@ const modules: Module[] = [
     title: "Marcações Diárias",
     description:
       "Visualize as marcações diárias sem contabilizar horas noturnas.",
-    price: "€399/mês",
+    price: "8€/mês",
     icon: CalendarRange,
     category: "Relatórios",
     features: [
@@ -111,7 +112,7 @@ const modules: Module[] = [
     title: "Registo de Tempos de Trabalho",
     description:
       "Consulte os registos de tempos de trabalho sem contabilizar horas noturnas.",
-    price: "€249/mês",
+    price: "8€/mês",
     icon: Clock,
     category: "Relatórios",
     features: [
@@ -129,7 +130,7 @@ const modules: Module[] = [
     id: "faltas",
     title: "Mapa de Faltas - Filtro",
     description: "Filtros avançados no Mapa de Faltas.",
-    price: "€349/mês",
+    price: "8€/mês",
     icon: Filter,
     category: "Relatórios",
     features: [
@@ -148,7 +149,7 @@ const modules: Module[] = [
     title: "Registo de Tempos de Trabalho",
     description:
       "Registos de tempos de trabalho sem horas extra “a não considerar”.",
-    price: "€349/mês",
+    price: "8€/mês",
     icon: FileClock,
     category: "Relatórios",
     features: [
@@ -166,7 +167,7 @@ const modules: Module[] = [
     id: "registo_tempo_maps",
     title: "Registo de Tempos de Trabalho - Maps",
     description: "Registos de trabalho com localização via Geofencing.",
-    price: "€349/mês",
+    price: "8€/mês",
     icon: MapPin,
     category: "Relatórios",
     features: [
@@ -183,7 +184,7 @@ const modules: Module[] = [
     id: "picagens_vm",
     title: "Mapa de Picagens por Dispositivo - VerifyMode",
     description: "Consulta de picagens por dispositivo com detalhe do método.",
-    price: "€349/mês",
+    price: "8€/mês",
     icon: Fingerprint,
     category: "Relatórios",
     features: [
@@ -200,7 +201,7 @@ const modules: Module[] = [
     id: "registo_tempo_trabalho_vm",
     title: "Registo de Tempos de Trabalho - VerifyMode",
     description: "Registos de trabalho com detalhe do método usado na picagem.",
-    price: "€349/mês",
+    price: "8€/mês",
     icon: ScanLine,
     category: "Relatórios",
     features: [
@@ -218,7 +219,7 @@ const modules: Module[] = [
     id: "listagem_registo_tempo_trabalho_vm",
     title: "Listagem de Registo de Tempos de Trabalho - VerifyMode",
     description: "Registos de trabalho com detalhe do método usado na picagem.",
-    price: "€349/mês",
+    price: "8€/mês",
     icon: List,
     category: "Relatórios",
     features: [
@@ -237,7 +238,7 @@ const modules: Module[] = [
     id: "Geo",
     title: "Geolocalização & Geofencing",
     description: "Veja, a movimentação, presença e cobertura das equipas.",
-    price: "€349/mês",
+    price: "1€/mês por Colaborador",
     icon: Radar,
     category: "Módulos",
     features: [
@@ -250,13 +251,14 @@ const modules: Module[] = [
     demoVideo: "https://youtu.be/e5N4s3dj0AM",
     detailedDescription:
       "Permite monitorizar, a localização de colaboradores e ativos, definindo áreas geográficas específicas para controlo e automatização de processos. Esta funcionalidade possibilita a execução automática de ações sempre que um utilizador entra ou sai de uma zona pré-configurada, garantindo uma gestão mais eficiente das equipas no terreno.",
+    note: "O valor apresentado aplica-se apenas aos colaboradores que utilizam esta funcionalidade.",
   },
   {
     id: "erp",
     title: "Integração com ERP",
     description:
       "Este módulo melhora a produtividade e reforça o controlo sobre os processos internos da sua empresa.",
-    price: "€349/mês",
+    price: "0,65€/mês por Colaborador",
     icon: Workflow,
     category: "Módulos",
     features: [
@@ -269,6 +271,7 @@ const modules: Module[] = [
     demoVideo: "https://youtu.be/uWzivIkfFzo",
     detailedDescription:
       "O Módulo de Integração com ERP conecta o 2Smart ao sistema ERP da sua organização, garantindo que dados relativos a colaboradores, horários, registos e relatórios são atualizados de forma automática e contínua. Esta integração elimina tarefas repetitivas, reduz erros humanos e assegura uma gestão mais ágil e precisa.",
+    note: "O valor apresentado aplica-se apenas aos colaboradores que utilizam esta funcionalidade.",
   },
 ];
 
@@ -324,7 +327,10 @@ export const ModulesPage: React.FC = () => {
             isDark ? "text-gray-400" : "text-gray-600"
           }`}
         >
-          A Plataforma 2Smart HR dispõe de vários módulos opcionais que podem ser contratados para integrar novas funcionalidades assim como Relatórios que lhe permitem efetuar análises mais segmentadas e abrangendo informações que não constam da versão base do 2Smart HR.
+          A Plataforma 2Smart HR dispõe de vários módulos opcionais que podem
+          ser contratados para integrar novas funcionalidades assim como
+          Relatórios que lhe permitem efetuar análises mais segmentadas e
+          abrangendo informações que não constam da versão base do 2Smart HR.
         </p>
       </div>
 

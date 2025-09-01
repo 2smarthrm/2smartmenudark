@@ -12,6 +12,7 @@ export interface Module {
   demoImage: string;
   detailedDescription: string;
   demoVideo?: string;
+  note?: string;
 
   /** Opcional: força o template de preços */
   pricingType?: "module" | "report";
@@ -99,7 +100,7 @@ Por favor, enviem-me mais informações sobre:
 Aguardo o vosso contacto.
 
 Cumprimentos,`;
-    const mailtoLink = `mailto:helpdesk@2smart.pt?subject=${encodeURIComponent(
+    const mailtoLink = `mailto:andreia.perdigao@2smart.pt?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
@@ -165,7 +166,7 @@ Cumprimentos,`;
               : "border-gray-200 bg-gray-50/50"
           }`}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <h2
               className={`text-2xl font-bold ${
                 isDark ? "text-white" : "text-gray-900"
@@ -173,6 +174,7 @@ Cumprimentos,`;
             >
               {module.title}
             </h2>
+
             <span
               className={`px-3 py-1 text-sm rounded-full border ${
                 isDark
@@ -182,6 +184,7 @@ Cumprimentos,`;
             >
               {module.price}
             </span>
+
             <span
               className={`px-3 py-1 text-sm rounded-full border ${
                 isDark
@@ -191,7 +194,18 @@ Cumprimentos,`;
             >
               {module.category}
             </span>
+
+            {module.note && (
+              <span
+                className={`text-xs leading-snug ml-2 ${
+                  isDark ? "text-white/60" : "text-gray-600"
+                }`}
+              >
+                {module.note}
+              </span>
+            )}
           </div>
+
           <button
             onClick={onClose}
             className={`p-2 rounded-lg transition-colors ${
@@ -350,7 +364,7 @@ Cumprimentos,`;
                 className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors"
               >
                 <Mail className="w-5 h-5" />
-                Solicitar Acesso por Email
+                Quero ser contactado pela Equipa 2Smart HR
               </button>
 
               <button
@@ -403,7 +417,7 @@ Cumprimentos,`;
               incluídas
             </div>
             <div className="text-sm text-gray-500">
-              Exportech Portugal © 2024
+              Exportech Portugal © 2025
             </div>
           </div>
         </div>
