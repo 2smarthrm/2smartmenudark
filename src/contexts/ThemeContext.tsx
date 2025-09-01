@@ -17,13 +17,14 @@ export const useTheme = () => {
 export const ThemeProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  // Força light SEMPRE
-  const [isDark] = useState<boolean>(false);
+  // Força dark SEMPRE
+  const [isDark] = useState<boolean>(true);
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add("light");
-    root.classList.remove("dark");
+    root.classList.add("dark");
+    root.classList.remove("light");
+    // opcional: não persistimos nada em localStorage
   }, []);
 
   const toggleTheme = () => {}; // desativado
