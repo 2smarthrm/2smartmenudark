@@ -41,7 +41,7 @@ const modules: Module[] = [
     icon: BarChart3,
     category: "Relatórios",
     features: [
-      "Totais de horas previstas, trabalhadas e faltas",
+      "Totais de horas previstas, trabalhadas e de ausência",
       "Faltas classificadas e não classificadas",
       "Horas extra e Banco de Horas",
       "Dias de férias e subsídios",
@@ -216,7 +216,6 @@ const modules: Module[] = [
     demoVideo: "https://youtu.be/uWzivIkfFzo",
     detailedDescription:
       "O Módulo de Integração com ERP conecta o 2Smart ao sistema ERP da sua organização, garantindo que dados relativos a colaboradores, horários, registos e relatórios são atualizados de forma automática e contínua. Esta integração elimina tarefas repetitivas, reduz erros humanos e assegura uma gestão mais ágil e precisa.",
-    note: "O valor apresentado aplica-se apenas aos colaboradores que utilizam esta funcionalidade.",
   },
 ];
 
